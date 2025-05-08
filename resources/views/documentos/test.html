@@ -1,0 +1,110 @@
+<div class="documentos-container">
+    <h1>Documentos</h1>
+
+    <!-- RUTA ACTUAL -->
+    <p class="documentos-ruta">
+        @if($parent_id)
+            @php 
+                $ruta = []; 
+                $carpeta = \App\Models\Documentos::find($parent_id); 
+            @endphp
+            <a href="{{ route('documentos.index') }}">Raíz</a> >
+            @while($carpeta)
+                @php $ruta[] = $carpeta; @endphp
+                @php $carpeta = $carpeta->padre; @endphp
+            @endwhile
+
+            @foreach(array_reverse($ruta) as $item)
+                @if($loop->last)
+                    {{ $item->nombre }}
+                @else
+                    <a href="{{ route('documentos.index', ['parent_id' => $item->id]) }}">{{ $item->nombre }}</a> >
+                @endif
+            @endforeach
+        @else
+            <strong>Raíz</strong>
+        @endif
+    </p>
+
+    <!-- BOTÓN RETROCEDER -->
+    @if($parent_id)
+        @php
+            $carpetaActual = \App\Models\Documentos::find($parent_id);
+        @endphp
+        <div class="documentos-retroceder">
+            @if($carpetaActual && $carpetaActual->padre)
+                <a href="{{ route('documentos.index', ['parent_id' => $carpetaActual->padre->id]) }}">
+                    <button>Retroceder</button>
+                </a>
+            @else
+                <a href="{{ route('documentos.index') }}">
+                    <button>Retroceder</button>
+                </a>
+            @endif
+        </div>
+    @endif
+
+    <!-- LISTADO DE CARPETAS -->
+    <div class="carpetas-grid">
+        @forelse ($carpetas as $carpeta)
+            <div class="carpeta-item">
+                <a href="{{ route('documentos.index', ['parent_id' => $carpeta->id]) }}">
+                    <span class="material-icons carpeta-icono">folder</span>
+                    <div class="carpeta-nombre">{{ $carpeta->nombre }}</div>
+                </a>
+            </div>
+        @empty
+            
+        @endforelse
+    </div>
+
+    
+
+</div>
+
+<!-- BOTÓN FLOTANTE PARA CREAR CARPETA -->
+<button class="documentos-fab" onclick="mostrarModal()">+</button>
+
+<!-- BOTÓN FLOTANTE PARA SUBIR ARCHIVO -->
+<button class="documentos-fab-subida" onclick="mostrarModalSubida()">↑</button>
+
+<!-- MODAL PARA CREAR CARPETA -->
+<div class="documentos-modal" id="modalCrear">
+    <div class="documentos-modal-content">
+        <h3>Crear nueva carpeta</h3>
+        <form method="POST" action="{{ route('documentos.crear-carpeta') }}">
+            @csrf
+            <input type="hidden" name="parent_id" value="{{ $parent_id }}">
+            <input type="text" name="nombre" placeholder="Nombre de la carpeta" required>
+            <div class="acciones">
+                <button type="button" onclick="cerrarModal()">Cancelar</button>
+                <button type="submit">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+    function mostrarModal() {
+        document.getElementById('modalCrear').style.display = 'flex';
+    }
+
+    function cerrarModal() {
+        document.getElementById('modalCrear').style.display = 'none';
+    }
+
+    function mostrarModalSubida() {
+        document.getElementById('modalSubida').style.display = 'flex';
+    }
+
+    function cerrarModalSubida() {
+        document.getElementById('modalSubida').style.display = 'none';
+    }
+
+    // Cierra el modal al presionar Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') cerrarModalSubida();
+    });
+</script>
