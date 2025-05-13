@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Carpetas extends Model
 {
     protected $fillable = ['nombre', 'parent_id'];
+    protected $table = 'carpetas';
 
-    // Relación para subcarpetas
-    public function subcarpetas()
+    public function hijos()
     {
         return $this->hasMany(Carpetas::class, 'parent_id');
     }
 
-    // Relación inversa para la carpeta padre
-    public function parent()
+    public function padre()
     {
         return $this->belongsTo(Carpetas::class, 'parent_id');
     }

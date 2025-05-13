@@ -40,7 +40,7 @@ class TrabajadorController extends Controller
             'jefe' => 'required|string|max:255',
             'cuenta_bancaria' => 'required|string|max:255',
             'No_IGSS' => 'required|string|max:255',
-            'archivo' => 'nullable|file|mimes:pdf,docx,jpg,png|max:2048',
+            'archivo' => 'nullable|file|mimes:pdf,docx,jpg,png|max:102400',
         ]);
 
         $archivo = null;

@@ -8,18 +8,50 @@
 
 <h1>Explorador de Documentos</h1>
 
+<!-- Ruta actual -->
 <p>Ruta actual: 
     @if($parent_id)
-        @php $ruta = []; $carpeta = \App\Models\Carpeta::find($parent_id); @endphp
+        @php 
+            $ruta = []; 
+            $carpeta = \App\Models\Carpetas::find($parent_id); 
+        @endphp
         @while($carpeta)
-            @php $ruta[] = $carpeta->nombre; @endphp
-            @php $carpeta = $carpeta->parent; @endphp
+            @php $ruta[] = $carpeta; @endphp
+            @php $carpeta = $carpeta->padre; @endphp
         @endwhile
-        {{ implode(' > ', array_reverse($ruta)) }}
+
+        <!-- Agregar la opción de 'Raíz' -->
+        <a href="{{ route('documentos.index') }}">Raíz</a> >
+        
+        @foreach(array_reverse($ruta) as $item)
+            @if($loop->last)
+                {{ $item->nombre }} <!-- Última carpeta no es un enlace -->
+            @else
+                <a href="{{ route('documentos.index', ['parent_id' => $item->id]) }}">{{ $item->nombre }}</a> > 
+            @endif
+        @endforeach
     @else
-        Raíz
+        <!-- Aquí mostramos el enlace de la raíz -->
+        <a href="{{ route('documentos.index') }}">Raíz</a>
     @endif
 </p>
+
+<!-- BOTÓN RETROCEDER -->
+@if($parent_id)
+    @php
+        $carpetaActual = \App\Models\Documentos::find($parent_id);
+    @endphp
+    @if($carpetaActual && $carpetaActual->padre)
+        <a href="{{ route('documentos.index', ['parent_id' => $carpetaActual->padre->id]) }}">
+            <button>Retroceder</button>
+        </a>
+    @else
+        {{-- Estamos en la primera carpeta después de la raíz --}}
+        <a href="{{ route('documentos.index') }}">
+            <button>Retroceder</button>
+        </a>
+    @endif
+@endif
 
 <!-- Formulario para crear nueva carpeta -->
 <h3>Crear nueva carpeta</h3>
@@ -39,6 +71,4 @@
         </li>
     @endforeach
 </ul>
-
-
 @endsection
