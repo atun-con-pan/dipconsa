@@ -26,7 +26,7 @@
         <p><strong>Número IGSS:</strong> {{ $trabajador->No_IGSS }}</p>
 
         @if ($trabajador->archivo)
-            <p><strong>Archivo:</strong> 
+            <p><strong>DPI:</strong> 
                 <a href="{{ asset('storage/' . $trabajador->archivo) }}" target="_blank">Ver Documento</a>
             </p>
         @endif

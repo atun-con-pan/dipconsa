@@ -91,6 +91,7 @@ h1 {
 }
 
 .card {
+    text-decoration: none;
     background-color: #fff;
     padding: 20px;
     width: 250px;

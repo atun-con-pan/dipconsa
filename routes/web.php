@@ -6,6 +6,7 @@ use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\CarpetasController;
 use App\Http\Controllers\FileExplorerController;
+use App\Http\Controllers\ArchivoController;
 
 Route::get('/', [HomeController::class, "index"])->name('home');
 
@@ -24,5 +25,7 @@ Route::get('/documentos/{documento}/ver', [DocumentoController::class, 'ver'])->
 
 Route::get('/documentos', [CarpetasController::class, 'index'])->name('documentos.index');
 Route::post('/documentos/crear-carpeta', [CarpetasController::class, 'crearCarpeta'])->name('documentos.crear-carpeta');
-//Route::post('/documentos/crear', [DocumentosController::class, 'crearCarpeta'])->name('documentos.crear-carpeta');
-//Route::post('documentos/subir-archivo', [DocumentosController::class, 'subirArchivo'])->name('documentos.subir-archivo');
+
+
+
+Route::post('/documentos/subir-archivo', [ArchivoController::class, 'subirArchivo'])->name('documentos.subir-archivo');

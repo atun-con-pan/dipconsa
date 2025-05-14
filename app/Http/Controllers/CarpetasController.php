@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Carpetas;
+use App\Models\Archivo;
 
 class CarpetasController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener las carpetas de acuerdo al path (parent_id)
-        $parent_id = $request->get('parent_id', null); // Si es null, estamos en la raíz
+        $parent_id = $request->get('parent_id', null);
+
         $carpetas = Carpetas::where('parent_id', $parent_id)->get();
+        $archivos = Archivo::where('parent_id', $parent_id)->get();
 
         return view('documentos.index', [
             'carpetas' => $carpetas,
+            'archivos' => $archivos,
             'parent_id' => $parent_id,
         ]);
     }
