@@ -36,20 +36,6 @@ h1 {
     border-bottom: 1px solid #eee;
 }
 
-.back-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #6c757d;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-
-.back-btn:hover {
-    background-color: #5a6268;
-}
-
 hr {
     border: none;
     border-top: 1px solid #ddd;
@@ -154,4 +140,26 @@ li {
 
 .delete-btn:hover {
     background-color: darkred;
+}
+
+.acciones {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.back-btn {
+    background-color: #6c757d; /* gris */
+}
+
+.edit-btn {
+    background-color: #007bff; /* azul */
 }

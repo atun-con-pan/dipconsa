@@ -81,38 +81,18 @@ class TrabajadorController extends Controller
     // Actualizar un trabajador
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nombres' => 'required|string|max:255',
-            'apellidos' => 'required|string|max:255',
-            'dpi' => 'required|string|max:255',
-            'fecha_nacimiento' => 'required|string|max:255',
-            'estado_civil' => 'required|string|max:255',
-            'residencia' => 'required|string|max:255',
-            'telefono' => 'required|string|max:20',
-            'email' => 'required|email|max:255|unique:trabajadores,email,' . $id,
-            'cargo' => 'required|string|max:255',
-            'inicio' => 'required|string|max:255',
-            'terminacion' => 'required|string|max:255',
-            'salario' => 'required|string|max:255',
-            'contrato' => 'required|string|max:255',
-            'jefe' => 'required|string|max:255',
-            'cuenta_bancaria' => 'required|string|max:255',
-            'No_IGSS' => 'required|string|max:255',
-            'archivo' => 'nullable|file|mimes:pdf,docx,jpg,png|max:2048',
-        ]);
-
         $trabajador = Trabajador::findOrFail($id);
 
-        $archivo = $trabajador->archivo;
-        if ($request->hasFile('archivo')) {
-            if ($archivo) {
-                \Storage::disk('public')->delete($archivo);
-            }
-            $archivo = $request->file('archivo')->store('archivos', 'public');
-        }
+        $data = $request->validate([
+            'nombre' => 'required|string',
+            'apellidos' => 'required|string',
+            'dpi' => 'required|string',
+            // ... valida todos los campos necesarios
+        ]);
 
+        // Si usas nombres de columnas distintos a los nombres de los campos del formulario, mapea aquí
         $trabajador->update([
-            'nombres' => $request->nombres,
+            'nombres' => $request->nombre,
             'apellidos' => $request->apellidos,
             'dpi' => $request->dpi,
             'fecha_nacimiento' => $request->fecha_nacimiento,
@@ -128,11 +108,18 @@ class TrabajadorController extends Controller
             'jefe' => $request->jefe,
             'cuenta_bancaria' => $request->cuenta_bancaria,
             'No_IGSS' => $request->No_IGSS,
-            'archivo' => $archivo,
         ]);
 
-        return redirect()->route('trabajadores.index');
+        // Si se sube un nuevo archivo
+        if ($request->hasFile('archivo')) {
+            $archivo = $request->file('archivo')->store('trabajadores', 'public');
+            $trabajador->archivo = $archivo;
+            $trabajador->save();
+        }
+
+        return redirect()->route('trabajadores.show', $trabajador->id)->with('success', 'Trabajador actualizado con éxito.');
     }
+
 
     // Eliminar un trabajador
     public function destroy($id)

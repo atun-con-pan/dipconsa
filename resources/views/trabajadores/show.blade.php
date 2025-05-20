@@ -32,7 +32,11 @@
         @endif
     </div>
 
-    <a href="{{ route('trabajadores.index') }}" class="back-btn">← Volver al listado</a>
+    <div class="acciones">
+        <a href="{{ route('trabajadores.index') }}" class="btn back-btn">← Volver al listado</a>
+        <a href="{{ route('trabajadores.edit', $trabajador->id) }}" class="btn edit-btn">✎ Editar</a>
+    </div>
+
 </div>
 
 <hr>
@@ -55,7 +59,7 @@
     <ul class="document-list">
         @forelse ($trabajador->documentos as $documento)
             <li>
-                <a href="{{ route('documentos.ver', $documento) }}" target="_blank">{{ $documento->nombre }}</a>
+                <a href="{{ route('documentos.ver', $documento->nombre) }}" target="_blank">{{ $documento->nombre }}</a>
                 <form action="{{ route('documentos.destroy', $documento) }}" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')

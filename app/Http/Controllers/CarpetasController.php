@@ -38,4 +38,27 @@ class CarpetasController extends Controller
         return redirect()->route('documentos.index', ['parent_id' => $request->parent_id]);
     }
 
+    public function destroy($id)
+    {
+        $carpeta = Carpetas::findOrFail($id);
+        $carpeta->delete();
+
+        return response()->json(['success' => true, 'message' => 'Carpeta eliminada']);
+    }
+
+    public function rename(Request $request, $id)
+    {
+        $request->validate([
+            'nuevo_nombre' => 'required|string|max:255',
+        ]);
+
+        $carpeta = Carpetas::findOrFail($id);
+        $carpeta->nombre = $request->input('nuevo_nombre');
+        $carpeta->save();
+
+        return response()->json(['success' => true, 'message' => 'Carpeta renombrada correctamente', 'nuevo_nombre' => $carpeta->nombre]);
+    }
+
+
+
 }

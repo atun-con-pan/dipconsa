@@ -37,15 +37,12 @@ class DocumentoController extends Controller
         return back()->with('success', 'Documento eliminado con éxito.');
     }
 
-    public function ver(Documento $documento)
+    public function ver($nombre)
     {
-        $path = storage_path('app/public/' . $documento->archivo);
+        $documento = Documento::where('nombre', $nombre)->firstOrFail();
+        $filePath = storage_path('app/public/' . $documento->archivo);
 
-        if (!file_exists($path)) {
-            abort(404);
-        }
-
-        return response()->file($path, [
+        return response()->file($filePath, [
             'Content-Disposition' => 'inline; filename="' . $documento->nombre . '"',
         ]);
     }
