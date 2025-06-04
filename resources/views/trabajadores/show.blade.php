@@ -24,17 +24,13 @@
         <p><strong>Jefe Inmediato:</strong> {{ $trabajador->jefe }}</p>
         <p><strong>Cuenta Bancaria:</strong> {{ $trabajador->cuenta_bancaria }}</p>
         <p><strong>Número IGSS:</strong> {{ $trabajador->No_IGSS }}</p>
-
-        @if ($trabajador->archivo)
-            <p><strong>DPI:</strong> 
-                <a href="{{ asset('storage/' . $trabajador->archivo) }}" target="_blank">Ver Documento</a>
-            </p>
-        @endif
     </div>
 
     <div class="acciones">
         <a href="{{ route('trabajadores.index') }}" class="btn back-btn">← Volver al listado</a>
-        <a href="{{ route('trabajadores.edit', $trabajador->id) }}" class="btn edit-btn">✎ Editar</a>
+        @if(Auth::user()->rol === 'admin')
+            <a href="{{ route('trabajadores.edit', $trabajador->id) }}" class="btn edit-btn">✎ Editar</a>
+        @endif
     </div>
 
 </div>
@@ -48,6 +44,7 @@
         <p class="success-message">{{ session('success') }}</p>
     @endif
 
+    @if(Auth::user()->rol === 'admin')
     <form action="{{ route('documentos.store', $trabajador) }}" method="POST" enctype="multipart/form-data" class="upload-form" id="upload-form">
         @csrf
         <label for="archivo" class="upload-label">
@@ -55,16 +52,19 @@
             <input type="file" name="archivo" id="archivo" required class="upload-input">
         </label>
     </form>
+    @endif
 
     <ul class="document-list">
         @forelse ($trabajador->documentos as $documento)
             <li>
                 <a href="{{ route('documentos.ver', $documento->nombre) }}" target="_blank">{{ $documento->nombre }}</a>
-                <form action="{{ route('documentos.destroy', $documento) }}" method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="delete-btn">Eliminar</button>
-                </form>
+                @if(Auth::user()->rol === 'admin')
+                    <form action="{{ route('documentos.destroy', $documento) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete-btn">Eliminar</button>
+                    </form>
+                @endif
             </li>
         @empty
             <li>No hay documentos cargados.</li>

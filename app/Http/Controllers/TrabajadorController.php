@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Trabajador;
+use App\Models\User;
 
 class TrabajadorController extends Controller
 {
     // Mostrar lista de trabajadores
     public function index()
     {
+        $usuarios = User::all();
         $trabajadores = Trabajador::all();
-        return view('trabajadores.index', compact('trabajadores'));
+        return view('trabajadores.index', compact('trabajadores', 'usuarios'));
     }
 
     // Mostrar formulario para crear un nuevo trabajador

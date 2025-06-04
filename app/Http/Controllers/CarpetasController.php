@@ -38,13 +38,39 @@ class CarpetasController extends Controller
         return redirect()->route('documentos.index', ['parent_id' => $request->parent_id]);
     }
 
-    public function destroy($id)
-    {
-        $carpeta = Carpetas::findOrFail($id);
-        $carpeta->delete();
+    // public function destroy($id)
+    // {
+    //     $carpeta = Carpetas::findOrFail($id);
+    //     $carpeta->delete();
 
-        return response()->json(['success' => true, 'message' => 'Carpeta eliminada']);
+    //     return response()->json(['success' => true, 'message' => 'Carpeta eliminada']);
+    // }
+
+    public function destroy($id)
+{
+    $carpeta = Carpetas::findOrFail($id);
+
+    // Eliminar archivos directamente contenidos en esta carpeta
+    $archivos = Archivo::where('parent_id', $id)->get();
+    foreach ($archivos as $archivo) {
+        if (\Storage::disk('public')->exists($archivo->archivo)) {
+            \Storage::disk('public')->delete($archivo->archivo);
+        }
+        $archivo->delete();
     }
+
+    // Buscar subcarpetas y eliminarlas recursivamente
+    $subcarpetas = Carpetas::where('parent_id', $id)->get();
+    foreach ($subcarpetas as $subcarpeta) {
+        $this->destroy($subcarpeta->id); // llamada recursiva
+    }
+
+    // Finalmente eliminar la carpeta
+    $carpeta->delete();
+
+    return response()->json(['success' => true, 'message' => 'Carpeta y su contenido eliminados correctamente.']);
+}
+
 
     public function rename(Request $request, $id)
     {

@@ -12,7 +12,9 @@
     <!-- Barra de búsqueda y botón -->
     <div class="header-tools">
         <input type="text" id="search-input" placeholder="Buscar trabajador..." value="{{ request('search') }}">
+        @if(Auth::user()->rol === 'admin')
         <a href="{{ route('trabajadores.create') }}" class="add-btn">Agregar Trabajador</a>
+        @endif
     </div>
 
     <!-- Contenedor de tarjetas -->

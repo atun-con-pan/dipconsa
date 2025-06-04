@@ -6,6 +6,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 @endpush
 
+@if(session('success'))
+    <p style="color: green;">{{ session('success') }}</p>
+@endif
+
 <div class="documentos-container">
     <h1>Explorador de Documentos</h1>
 

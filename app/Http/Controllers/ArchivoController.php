@@ -81,7 +81,10 @@ class ArchivoController extends Controller
     // FUNCIÓN PARA ELIMINAR UN REGISTRO
     public function destroy(Archivo $archivo)
     {
-        \Storage::disk('public')->delete($archivo->archivo);
+        if (Storage::disk('public')->exists($archivo->archivo)) {
+            Storage::disk('public')->delete($archivo->archivo);
+        }
+
         $archivo->delete();
 
         return redirect()->back()->with('success', 'Archivo eliminado correctamente.');
