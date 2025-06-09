@@ -10,6 +10,7 @@ use App\Http\Controllers\FileExplorerController;
 use App\Http\Controllers\ArchivoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AyudaController;
+use App\Http\Middleware\AdminMiddleware;
 
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
@@ -43,10 +44,9 @@ Route::put('/documentos/{archivo}', [ArchivoController::class, 'update'])->name(
 Route::delete('/archivos/{archivo}', [ArchivoController::class, 'destroy'])->name('archivos.destroy')->middleware('auth');
 Route::get('/archivos/{nombre_archivo}', [ArchivoController::class, 'ver'])->name('archivos.ver')->middleware('auth');
 
-Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index')->middleware('auth');
-Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store')->middleware('auth');
-Route::post('/usuarios/{usuario}/update', [UsuarioController::class, 'update'])->name('usuarios.update')->middleware('auth');
-Route::resource('usuarios', UsuarioController::class)->middleware('auth');
-
+Route::middleware(['auth', AdminMiddleware::class])->get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::middleware(['auth', AdminMiddleware::class])->post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+//Route::middleware(['auth', AdminMiddleware::class])->post('/usuarios/{usuario}/update', [UsuarioController::class, 'update'])->name('usuarios.update');
+Route::middleware(['auth', AdminMiddleware::class])->resource('usuarios', UsuarioController::class);
 
 Route::get('/ayuda', [AyudaController::class, 'index'])->name('ayuda.index')->middleware('auth');

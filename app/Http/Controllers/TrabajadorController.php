@@ -42,7 +42,6 @@ class TrabajadorController extends Controller
             'jefe' => 'required|string|max:255',
             'cuenta_bancaria' => 'required|string|max:255',
             'No_IGSS' => 'required|string|max:255',
-            'archivo' => 'nullable|file|mimes:pdf,docx,jpg,png|max:102400',
         ]);
 
         $archivo = null;
@@ -67,7 +66,6 @@ class TrabajadorController extends Controller
             'jefe' => $request->jefe,
             'cuenta_bancaria' => $request->cuenta_bancaria,
             'No_IGSS' => $request->No_IGSS,
-            'archivo' => $archivo,
         ]);
 
         return redirect()->route('trabajadores.index');
@@ -119,7 +117,7 @@ class TrabajadorController extends Controller
             $trabajador->save();
         }
 
-        return redirect()->route('trabajadores.show', $trabajador->id)->with('success', 'Trabajador actualizado con éxito.');
+        return redirect()->route('trabajadores.index', $trabajador->id)->with('success', 'Trabajador actualizado con éxito.');
     }
 
 

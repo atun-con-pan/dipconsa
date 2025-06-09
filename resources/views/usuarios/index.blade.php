@@ -1,12 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@push('styles')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-@endpush
 @push('script')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         @if(session('openModalId'))
@@ -33,8 +28,6 @@
         });
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
 @endpush
 
 <!-- Modal -->
@@ -144,7 +137,7 @@
                             <div class="modal-content">
                                 <form method="POST" action="{{ route('usuarios.update', $usuario->id) }}">
                                     @csrf
-                                    
+                                    @method('PUT')
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editarModalLabel-{{ $usuario->id }}">Editar Usuario</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>

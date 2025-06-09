@@ -14,8 +14,19 @@
 </head>
 <body>
     <div class="header">
-        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-        <h2>Dashboard</h2>
+        <div class="d-flex align-items-center">
+            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+            <h2>Dashboard</h2>
+        </div>
+        
+        @if(Auth::check())
+            <div class="welcome-banner">
+                <div class="icon">👋</div>
+                <div class="text">
+                    ¡Hola, <strong>{{ Auth::user()->nombre }}</strong>! Bienvenid@ de nuevo.
+                </div>
+            </div>
+        @endif
     </div>
 
     <nav class="sidebar" id="sidebar">
@@ -82,6 +93,8 @@
     </div>
     </div>
 
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
@@ -122,12 +135,14 @@
         toast.show();
 
         toastEl.addEventListener('hidden.bs.toast', () => {
-            window.location.href = "{{ route('login') }}";
+            window.location.assign("{{ route('logout') }}");
+            window.location.reload()
         });
 
         // O redirigir después de 5 segundos (por si no cierran el toast)
         setTimeout(() => {
-            window.location.href = "{{ route('login') }}";
+            window.location.assign("{{ route('logout') }}");
+            window.location.reload();
         }, 5000);
     }
 

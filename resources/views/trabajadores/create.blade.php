@@ -13,7 +13,7 @@
 
         <div>
             <label for="nombres">Nombres</label>
-            <input type="text" name="nombres" required>
+            <input type="text" name="nombres" required autofocus>
         </div>
 
         <div>
@@ -26,14 +26,20 @@
             <input type="text" name="dpi" required>
         </div>
 
-        <div>
-            <label for="fecha_nacimiento">Fecha nacimiento</label>
-            <input type="text" name="fecha_nacimiento" required>
+        <div class="mb-3">
+            <label for="fecha_nacimiento" class="form-label">Fecha nacimiento</label>
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" required>
         </div>
 
-        <div>
-            <label for="estado_civil">Estado civil</label>
-            <input type="text" name="estado_civil" required>
+        <div class="mb-3">
+            <label for="estado_civil" class="form-label">Estado civil</label>
+            <select name="estado_civil" id="estado_civil" class="form-select" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="Casado">Casado/a</option>
+                <option value="Soltero">Soltero/a</option>
+                <option value="Divorciado">Divorciado/a</option>
+                <option value="Unido">Unido/a</option>
+            </select>
         </div>
 
         <div>
@@ -51,19 +57,30 @@
             <input type="text" name="email" required>
         </div>
 
-        <div>
-            <label for="cargo">Cargo/Puesto</label>
-            <input type="text" name="cargo" required>
+        <div class="mb-3">
+            <label for="cargo" class="form-label">Cargo/Puesto</label>
+            <select name="cargo" id="cargo" class="form-select" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="Gerente">Gerente</option>
+                <option value="Ingeniero/a">Ingeniero/a</option>
+                <option value="Abogado/a">Abogado/a</option>
+                <option value="Arquitecto/a">Arquitecto/a</option>
+                <option value="Contador">Contador/a</option>
+                <option value="Auditor">Auditor/a</option>
+                <option value="Tecnico">Técnico/a</option>
+                <option value="Recepcionista">Recepcionista</option>
+                <option value="Practicante">Practicante</option>
+            </select>
         </div>
 
-        <div>
-            <label for="inicio">Inicio</label>
-            <input type="text" name="inicio" required>
+        <div class="mb-3">
+            <label for="inicio" class="form-label">Inicio</label>
+            <input type="date" name="inicio" id="inicio" class="form-control" required>
         </div>
 
-        <div>
-            <label for="terminacion">Terminación</label>
-            <input type="text" name="terminacion" required>
+        <div class="mb-3">
+            <label for="terminacion" class="form-label">Terminación</label>
+            <input type="date" name="terminacion" id="terminacion" class="form-control" required>
         </div>
 
         <div>
@@ -71,9 +88,15 @@
             <input type="text" name="salario" required>
         </div>
 
-        <div>
-            <label for="contrato">Contrato</label>
-            <input type="text" name="contrato" required>
+
+        <div class="mb-3">
+            <label for="contrato" class="form-label">Contrato</label>
+            <select name="contrato" id="contrato" class="form-select" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="Permanente">Permanente</option>
+                <option value="Temporal">Temporal</option>
+                <option value="Practicante">Practicante</option>
+            </select>
         </div>
 
         <div>
@@ -89,11 +112,6 @@
         <div>
             <label for="No_IGSS">No. IGSS</label>
             <input type="text" name="No_IGSS" required>
-        </div>
-
-        <div>
-            <label for="archivo">Archivo</label>
-            <input type="file" name="archivo">
         </div>
 
         <div>

@@ -93,7 +93,7 @@
                         <td>
                             <div class="acciones-botones">
                                 <a href="{{ route('archivos.ver', $archivo->nombre_archivo) }}" target="_blank" class="btn-ver">Ver</a>
-                               
+                               @if(Auth::user()->rol === 'admin')
                                 <form action="{{ route('archivos.destroy', $archivo->id) }}" method="POST" style="display:inline;" class="form-eliminar">
                                     @csrf
                                     @method('DELETE')
@@ -101,6 +101,7 @@
                                 </form>
 
                                 <button type="button" class="btn-editar" onclick="abrirModalEditar({{ $archivo->id }}, '{{ addslashes($archivo->descripcion) }}')">Editar</button>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -184,6 +185,7 @@
         </form>
     </dialog>
 
+    @if(Auth::user()->rol === 'admin')
     <!-- Menú contextual personalizado -->
     <div id="contextMenu" class="custom-context-menu">
         <ul>
@@ -191,6 +193,7 @@
             <li onclick="eliminarCarpeta()">🗑️ Eliminar</li>
         </ul>
     </div>
+    @endif
 
     <!-- Modal Renombrar Carpeta -->
     <div id="modalRenombrar" class="modal" style="display:none;">
@@ -414,6 +417,5 @@
 
 
 </script>
-<!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @endsection

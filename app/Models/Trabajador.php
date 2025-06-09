@@ -13,7 +13,7 @@ class Trabajador extends Model
 
     // Campos que se pueden llenar masivamente
     protected $fillable = [
-        'nombres', 'apellidos', 'dpi', 'fecha_nacimiento', 'estado_civil', 'residencia', 'telefono', 'email', 'cargo', 'inicio', 'terminacion', 'salario', 'contrato', 'jefe', 'cuenta_bancaria', 'No_IGSS', 'archivo',
+        'nombres', 'apellidos', 'dpi', 'fecha_nacimiento', 'estado_civil', 'residencia', 'telefono', 'email', 'cargo', 'inicio', 'terminacion', 'salario', 'contrato', 'jefe', 'cuenta_bancaria', 'No_IGSS',
     ];
 
     public function documentos()

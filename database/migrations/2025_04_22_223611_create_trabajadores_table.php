@@ -29,7 +29,6 @@ return new class extends Migration
             $table->string('jefe');
             $table->string('cuenta_bancaria');
             $table->string('No_IGSS');
-            $table->string('archivo')->nullable();
             $table->timestamps();
         });
     }
