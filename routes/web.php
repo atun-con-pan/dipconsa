@@ -21,9 +21,9 @@ Route::get('/home', [HomeController::class, "index"])->name('home')->middleware(
 
 Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores.index')->middleware('auth');
 Route::get('/trabajadores/create', [TrabajadorController::class, 'create'])->name('trabajadores.create')->middleware('auth');
-Route::get('trabajadores/{id}/edit', [TrabajadorController::class, 'edit'])->name('trabajadores.edit')->middleware('auth');
-Route::put('/trabajadores/{trabajador}', [TrabajadorController::class, 'update'])->name('trabajadores.update')->middleware('auth');
-Route::get('/trabajadores/{trabajador}', [TrabajadorController::class, 'show'])->name('trabajadores.show')->middleware('auth');
+//Route::get('trabajadores/{id}/edit', [TrabajadorController::class, 'edit'])->name('trabajadores.edit')->middleware('auth');
+//Route::put('/trabajadores/{trabajador}', [TrabajadorController::class, 'update'])->name('trabajadores.update')->middleware('auth');
+//Route::get('/trabajadores/{trabajador}', [TrabajadorController::class, 'show'])->name('trabajadores.show')->middleware('auth');
 Route::resource('trabajadores', TrabajadorController::class)->middleware('auth');
 
 Route::post('/trabajadores/{trabajador}/documentos', [DocumentoController::class, 'store'])->name('documentos.store')->middleware('auth');

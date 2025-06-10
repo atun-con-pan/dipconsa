@@ -11,6 +11,54 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     @stack('styles')
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .menu-btn {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .header h2 {
+            margin: 0 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .welcome-banner {
+            background-color: #12394f;
+            border-left: 5px solid #0d6efd;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .welcome-banner .icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+            color: #0d6efd;
+        }
+
+        .welcome-banner .text strong {
+            color: #0d6efd;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-banner {
+                display: none; /* Oculta el mensaje en pantallas pequeñas si prefieres */
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="header">
