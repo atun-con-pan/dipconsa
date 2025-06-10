@@ -79,7 +79,6 @@
                     class="form-control"
                     required
                     autofocus
-                    value="abelardofelipe722@gmail.com"
                 />
                 @error('email')
                     <small class="text-danger">{{ $message }}</small>
@@ -93,7 +92,6 @@
                     id="password"
                     class="form-control"
                     required
-                    value="123456789"
                 />
                 @error('password')
                     <small class="text-danger">{{ $message }}</small>
