@@ -1,0 +1,670 @@
+/* Contenedor general */
+.documentos-container{
+    padding:24px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+}
+
+.ruta-actual {
+    font-family: sans-serif;
+    font-size: 15px;
+    margin: 20px 0;
+    padding: 10px 16px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.ruta-actual a {
+    text-decoration: none;
+    color: #0078d7;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.ruta-actual a:hover {
+    color: #0056a3;
+    text-decoration: underline;
+}
+
+.ruta-actual strong {
+    color: #555;
+}
+
+.ruta-actual span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Grilla estilo Windows */
+.grid-carpetas{
+    /* cada “cuadro” tendrá ~170 px de ancho mínimo, como en Windows */
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+    gap:1px;                /* amplia separación */
+    justify-items:center;    /* centrado horizontal */
+    align-items:start;       /* nombre debajo del icono */
+}
+
+/* Ítem carpeta */
+.carpeta-item{
+    user-select:none;
+    cursor:pointer;
+    width:170px;             /* fija la “miniatura” */
+    text-align:center;
+    padding:14px 6px;        /* espacio alrededor (invisible) */
+    border-radius:6px;       /* mismo radio que Windows 11 */
+    transition:background 0.15s ease, transform 0.15s ease;
+}
+
+.carpeta-item a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Efecto hover: “selección” azul suave */
+.carpeta-item:hover{
+    background:#e7f3ff;
+}
+
+/* Icono grande y color carpeta Windows-like */
+.carpeta-icon{
+    font-size:86px !important;          /* icono grande */
+    color:#f8d775;
+    line-height:1;
+    display:block;
+    margin-bottom:6px;
+}
+
+/* Nombre debajo, con corte en dos líneas máximo */
+.carpeta-nombre{
+    font-size:15px;
+    font-weight:500;
+    text-align:center;
+    word-break:break-word;
+    overflow:hidden;
+    display:-webkit-box;
+    -webkit-line-clamp:2;    /* máximo dos líneas */
+    -webkit-box-orient:vertical;
+}
+
+/* Pequeño “zoom” sutil para más sensación de responsividad */
+.carpeta-item:hover{
+    transform:scale(1.04);
+}
+
+/* Botón flotante estilo “+” */
+.btn-flotante {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 32px;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    z-index: 1000;
+}
+
+.btn-flotante:hover {
+    background-color: #005fa3;
+}
+
+/* Modal centrado */
+.modal-crear {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 8px;
+    padding: 24px 32px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    background: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.2s ease-in-out;
+    z-index: 2000;
+}
+
+.modal-crear::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-crear form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Contenedor de botones */
+.modal-crear .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Botones */
+.modal-crear button {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.modal-crear button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modal-crear button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.modal-crear button[type="button"] {
+    background-color: #f44336;
+    color: white;
+}
+
+.modal-crear button[type="button"]:hover {
+    background-color: #d32f2f;
+}
+/*
+.modal-subir {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 8px;
+    padding: 24px 32px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    background: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.2s ease-in-out;
+    z-index: 2000;
+}
+
+.modal-subir::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-subir form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}*/
+
+
+/* Centrar el modal */
+.modal-subir {
+    width: 100%;
+    max-width: 450px;
+    border: none;
+    border-radius: 12px;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Estilo general del formulario */
+.modal-subir form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Título */
+.modal-subir h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+/* Labels */
+.modal-subir label {
+    font-weight: bold;
+    color: #444;
+}
+
+/* Inputs de texto */
+.modal-subir input[type="text"] {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+/* Contenedor de botones */
+.modal-subir .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Botones */
+.modal-subir button {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.modal-subir button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modal-subir button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.modal-subir button[type="button"] {
+    background-color: #f44336;
+    color: white;
+}
+
+.modal-subir button[type="button"]:hover {
+    background-color: #d32f2f;
+}
+
+/* === Estilo hermoso para input file === */
+#archivo {
+    display: none;
+}
+
+.custom-file-label {
+    display: block;
+    border: 2px dashed #2196F3;
+    background-color: #f0f8ff;
+    color: #2196F3;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.custom-file-label:hover {
+    background-color: #e3f2fd;
+    border-color: #1976D2;
+    color: #1976D2;
+}
+
+/* Para mostrar el nombre del archivo seleccionado */
+#archivo-nombre {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+    font-style: italic;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.tooltip-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1001; /* por encima del resto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse; /* para que el tooltip quede arriba */
+}
+
+/* Estilo del tooltip */
+.tooltip-text {
+    position: absolute;
+    bottom: 70px; /* espacio entre el botón y el tooltip */
+    right: 0;
+    transform: translateX(25%);
+    background-color: #333;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 1100;
+}
+
+/* Mostrar el tooltip al hacer hover */
+.tooltip-container:hover .tooltip-text {
+    opacity: 1;
+    visibility: visible;
+}
+
+.ruta-actual {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    gap: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.ruta-texto a,
+.ruta-texto span {
+    font-size: 16px;
+    margin-right: 6px;
+}
+
+.ruta-texto a:hover {
+    text-decoration: underline;
+    color: #0078d7;
+}
+
+.retroceder button {
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.retroceder button:hover {
+    background-color: #005a9e;
+}
+
+.tooltip-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.opciones-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.btn-flotante {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.3s;
+}
+
+.opciones-flotantes {
+    display: none;
+    width: 200px;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    bottom: 80px; /* ahora solo un poco arriba del botón */
+    right: 0;
+    z-index: 200;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para los botones dentro del menú flotante */
+.btn-subopcion {
+    background-color: #3498db;  /* Azul brillante */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;  /* Para que los botones ocupen todo el ancho disponible */
+    text-align: left; /* Para alinear el texto a la izquierda */
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.btn-subopcion:hover {
+    background-color: #2980b9;  /* Cambio de color al pasar el ratón */
+}
+
+.btn-subopcion:focus {
+    outline: none;
+    box-shadow: 0 0 5px 2px rgba(52, 152, 219, 0.5);  /* Sombra cuando el botón es enfocado */
+}
+
+/* Icono dentro del botón (si deseas que el icono se vea antes del texto) */
+.btn-subopcion span {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.separator{
+    display: flex;
+    border-bottom: #555 solid 1px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.tabla-archivos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-family: sans-serif;
+}
+
+.tabla-archivos th,
+.tabla-archivos td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.tabla-archivos th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.tabla-archivos tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabla-archivos tr:hover {
+    background-color: #f1f1f1;
+}
+
+.acciones-botones {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-ver,
+.btn-eliminar,
+.btn-editar {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    min-width: 80px;
+    transition: background-color 0.2s;
+}
+
+/* Colores específicos */
+.btn-ver {
+    background-color: #3490dc; /* Azul */
+}
+.btn-ver:hover {
+    background-color: #2779bd;
+}
+
+.btn-editar {
+    background-color: #38c172; /* Verde */
+}
+.btn-editar:hover {
+    background-color: #2f9e63;
+}
+
+.btn-eliminar {
+    background-color: #e3342f; /* Rojo */
+}
+.btn-eliminar:hover {
+    background-color: #cc1f1a;
+}
+
+.buscador {
+    display: flex;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.custom-context-menu {
+    position: fixed; /* fijo para posicionarlo respecto a la ventana */
+    width: 200px;    /* ancho fijo o ajustable */
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 1000;
+    /* Los siguientes 2 hacen el centrado con left/top */
+    left: 50%;
+    top: 50%;
+    /* El transform corrige para que el punto de referencia sea el centro */
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    border-radius: 5px;
+}
+.custom-context-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.custom-context-menu ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+.custom-context-menu ul li:hover {
+    background-color: #eee;
+}
+
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  width: 300px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 65px;
+}
+
+.modal-buttons button {
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#btnCancelarRenombrar {
+  background: #ccc;
+  color: #333;
+}
+
+#btnGuardarRenombrar {
+  background: #28a745;
+  color: white;
+}
+
+#tabla-cuerpo:empty {
+  display: none;
+  pointer-events: none;
+}

@@ -1,0 +1,45 @@
+.container {
+    margin-top: 2rem;
+}
+
+/* .card-grid con gap (bootstrap 5 tiene gap en flex) */
+.card-grid {
+    gap: 1rem;
+}
+
+/* Avatar */
+.avatar {
+    width: 64px;
+    height: 64px;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 64px;
+}
+
+/* User-info */
+.user-info strong {
+    margin: 0 0.2rem;
+}
+
+/* Responsive extra para móviles */
+@media (max-width: 576px) {
+    .header-tools {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    #search-input {
+        max-width: 100% !important;
+        margin-bottom: 1rem;
+    }
+
+    .btn.btn-success {
+        width: 100%;
+        text-align: center;
+        margin-left: 0 !important;
+    }
+
+    .user-card {
+        width: 100% !important;
+    }
+}

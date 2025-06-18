@@ -1,0 +1,165 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 2.2rem;
+    color: #2c3e50;
+}
+
+.detalle-trabajador {
+    max-width: 1000px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
+    margin-bottom: 30px;
+}
+
+.info-grid p {
+    font-size: 1rem;
+    margin: 0;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 50px auto;
+    max-width: 1000px;
+}
+
+.documentos-section {
+    max-width: 1000px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.documentos-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.success-message {
+    color: #28a745;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.upload-form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.upload-label {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.upload-label:hover {
+    background-color: #0056b3;
+}
+
+.upload-input {
+    display: none; /* Ocultar el input de tipo archivo */
+}
+
+.document-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 15px;
+}
+
+.document-list li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f7f9fc;
+    border-radius: 6px;
+    border-left: 4px solid #007bff;
+}
+
+.document-list a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+}
+
+.document-list a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between; /* Esto asegura que los elementos estén alineados correctamente */
+    align-items: center;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}
+
+.acciones {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.back-btn {
+    background-color: #6c757d; /* gris */
+}
+
+.edit-btn {
+    background-color: #007bff; /* azul */
+}
